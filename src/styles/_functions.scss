@@ -1,0 +1,20 @@
+// Lighten
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+// Darken
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+@mixin tile-borders($tile-color) {
+  border-top: $tile-border-width solid tint($tile-color, 30%);
+  border-bottom: $tile-border-width solid shade($tile-color, 30%);
+  border-left: $tile-border-width solid tint($tile-color, 20%);
+  border-right: $tile-border-width solid shade($tile-color, 20%);
+}
+
+@mixin glow($tile-color) {
+  box-shadow: 0px 0px 75px 8px $tile-color;
+}

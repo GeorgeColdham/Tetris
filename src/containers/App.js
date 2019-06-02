@@ -1,38 +1,15 @@
-import React, { useReducer, useEffect, createContext } from 'react'
-import Text from '../components/Text'
-import Buttons from '../components/Buttons'
-
-export const ButtonContext = createContext()
-export const ButtonProvider = ButtonContext.Provider
-export const ButtonConsumer = ButtonContext.Consumer
-
-const initialState = { count: 0 }
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'increment':
-      return { count: state.count + 1 }
-    case 'decrement':
-      return { count: state.count - 1 }
-    default:
-      throw new Error()
-  }
-}
+import React from 'react'
 
 export default function App () {
-  const [state, dispatch] = useReducer(reducer, initialState)
-  const buttonContextValues = {
-    ...state,
-    dispatch
-  }
-
-  useEffect(() => {
-    document.title = `You clicked ${state.count} times`
-  })
-
   return (
-    <ButtonProvider value={buttonContextValues}>
-      <Text />
-      <Buttons />
-    </ButtonProvider>
+    <>
+      <div className='tile s-shape glow' />
+      <div className='tile z-shape glow' />
+      <div className='tile t-shape glow' />
+      <div className='tile l-shape glow' />
+      <div className='tile line-shape glow' />
+      <div className='tile mirrored-l-shape glow' />
+      <div className='tile square-shape glow' />
+    </>
   )
 }

@@ -1,0 +1,54 @@
+.tile {
+  height: $tile-height;
+  width: $tile-width;
+}
+
+.s-shape {
+  background-color: $s-shape-tile-color;
+  @include tile-borders($s-shape-tile-color);
+
+  &.glow { @include glow($s-shape-tile-color); }
+}
+
+.z-shape {
+  background-color: $z-shape-tile-color;
+  @include tile-borders($z-shape-tile-color);
+
+  &.glow { @include glow($z-shape-tile-color); }
+}
+
+.t-shape {
+  background-color: $t-shape-tile-color;
+  @include tile-borders($t-shape-tile-color);
+
+  &.glow { @include glow($t-shape-tile-color); }
+}
+
+.l-shape {
+  background-color: $l-shape-tile-color;
+  @include tile-borders($l-shape-tile-color);
+
+  &.glow { @include glow($l-shape-tile-color); }
+}
+
+.line-shape {
+  background-color: $line-shape-tile-color;
+  @include tile-borders($line-shape-tile-color);
+
+  &.glow { @include glow($line-shape-tile-color); }
+}
+
+.mirrored-l-shape {
+  background-color: $mirrored-l-shape-tile-color;
+  @include tile-borders($mirrored-l-shape-tile-color);
+
+  &.glow { @include glow($mirrored-l-shape-tile-color); }
+}
+
+.square-shape {
+  background-color: $square-shape-tile-color;
+  @include tile-borders($square-shape-tile-color);
+
+  &.glow { @include glow($square-shape-tile-color); }
+
+}

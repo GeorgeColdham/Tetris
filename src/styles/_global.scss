@@ -8,32 +8,5 @@ body {
   display:flex;
   justify-content:center;
   align-items:center;
-  background-color:gold;
-}
-
-button {
-  font-size:1rem;
-  background-color:black;
-  color:white;
-  border:none;
-  margin:0;
-  padding:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  width:8rem;
-  height:3rem;
-  text-transform:uppercase;
- 
-}
-button:focus {
-  outline:none;
-}
-button:hover {
-  background-color:lightgray;
-  color:black;
-}
-button:active {
-  background-color:white;
-  color:black;
+  background-color:$bg-color;
 }
