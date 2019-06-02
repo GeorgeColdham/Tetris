@@ -1,15 +1,24 @@
 import React from 'react'
+import Board from '../components/Board'
 
 export default function App () {
+  // const state = {
+  //   board: [
+  //     {
+  //       row: 0,
+  //       column: 0,
+  //       active: true,
+  //       type: T_SHAPE,
+  //       isOrigin: true,
+  //       shape_id: 12345
+  //     }
+  //   ]
+  // }
+
   return (
     <>
-      <div className='tile s-shape glow' />
-      <div className='tile z-shape glow' />
-      <div className='tile t-shape glow' />
-      <div className='tile l-shape glow' />
-      <div className='tile line-shape glow' />
-      <div className='tile mirrored-l-shape glow' />
-      <div className='tile square-shape glow' />
+      <Board />
+      <button onClick={() => console.log('clicked')}>Add Tile</button>
     </>
   )
 }

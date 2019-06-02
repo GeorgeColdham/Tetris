@@ -1,5 +1,7 @@
-$board-width: 100vw;
-$tile-width: $board-width / 10;
+$board-height:80vh;
+$board-columns: 10;
+$board-rows: 20;
+$tile-width: $board-height / $board-rows;
 $tile-height: $tile-width;
-$board-height: $tile-height * 15;
+$board-width: $tile-height * $board-columns;
 $tile-border-width: $tile-width * 0.1;
