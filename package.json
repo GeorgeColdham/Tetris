@@ -1,5 +1,5 @@
 {
-  "name": "Tetris",
+  "name": "tetris",
   "version": "1.0.0",
   "private": true,
   "description": "A boilerplate for a React application, using webpack and npm",

@@ -1,18 +1,38 @@
-import React, { useState, useEffect } from 'react'
+import React, { useReducer, useEffect, createContext } from 'react'
 import Text from '../components/Text'
-import Button from '../components/Button'
+import Buttons from '../components/Buttons'
+
+export const ButtonContext = createContext()
+export const ButtonProvider = ButtonContext.Provider
+export const ButtonConsumer = ButtonContext.Consumer
+
+const initialState = { count: 0 }
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 }
+    case 'decrement':
+      return { count: state.count - 1 }
+    default:
+      throw new Error()
+  }
+}
 
 export default function App () {
-  const [count, setCount] = useState(0)
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const buttonContextValues = {
+    ...state,
+    dispatch
+  }
 
   useEffect(() => {
-    document.title = `You clicked ${count} times`
+    document.title = `You clicked ${state.count} times`
   })
 
   return (
-    <>
-      <Text count={count} />
-      <Button setCount={setCount} count={count} />
-    </>
+    <ButtonProvider value={buttonContextValues}>
+      <Text />
+      <Buttons />
+    </ButtonProvider>
   )
 }

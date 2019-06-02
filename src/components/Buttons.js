@@ -6,11 +6,14 @@ export default function Text (props) {
     <ButtonConsumer>
       {values => (
         <>
-          <p>You clicked {values.count} times</p>
+          <button onClick={() => values.dispatch({ type: 'increment' })}>
+          +
+          </button>
+          <button onClick={() => values.dispatch({ type: 'decrement' })}>
+          -
+          </button>
         </>
-
       )}
     </ButtonConsumer>
-
   )
 }
