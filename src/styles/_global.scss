@@ -10,3 +10,9 @@ body {
   align-items:center;
   background-color:$bg-color;
 }
+
+img {
+  object-fit: cover;
+  height: 90vh;
+  image-rendering: pixelated;
+}

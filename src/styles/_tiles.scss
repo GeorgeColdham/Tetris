@@ -1,54 +1,55 @@
-.tile {
-  height: $tile-height;
-  width: $tile-width;
-}
-
-.s-shape {
+.s-shape::after {
   background-color: $s-shape-tile-color;
   @include tile-borders($s-shape-tile-color);
+  @include tile-after-element;
 
   &.glow { @include glow($s-shape-tile-color); }
 }
 
-.z-shape {
+.z-shape::after {
   background-color: $z-shape-tile-color;
   @include tile-borders($z-shape-tile-color);
+  @include tile-after-element;
 
   &.glow { @include glow($z-shape-tile-color); }
 }
 
-.t-shape {
+.t-shape::after {
   background-color: $t-shape-tile-color;
   @include tile-borders($t-shape-tile-color);
+  @include tile-after-element;
 
   &.glow { @include glow($t-shape-tile-color); }
 }
 
-.l-shape {
+.l-shape::after {
   background-color: $l-shape-tile-color;
   @include tile-borders($l-shape-tile-color);
+  @include tile-after-element;
 
   &.glow { @include glow($l-shape-tile-color); }
 }
 
-.line-shape {
+.line-shape::after {
   background-color: $line-shape-tile-color;
   @include tile-borders($line-shape-tile-color);
+  @include tile-after-element;
 
   &.glow { @include glow($line-shape-tile-color); }
 }
 
-.mirrored-l-shape {
+.mirrored-l-shape::after {
   background-color: $mirrored-l-shape-tile-color;
   @include tile-borders($mirrored-l-shape-tile-color);
+  @include tile-after-element;
 
   &.glow { @include glow($mirrored-l-shape-tile-color); }
 }
 
-.square-shape {
+.square-shape::after {
   background-color: $square-shape-tile-color;
   @include tile-borders($square-shape-tile-color);
+  @include tile-after-element;
 
   &.glow { @include glow($square-shape-tile-color); }
-
 }

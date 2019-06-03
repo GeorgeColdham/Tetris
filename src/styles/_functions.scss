@@ -18,3 +18,11 @@
 @mixin glow($tile-color) {
   box-shadow: 0px 0px 75px 8px $tile-color;
 }
+
+@mixin tile-after-element {
+  display: block;
+  content: '';
+  height: $tile-height;
+  width: $tile-width;
+  box-sizing:border-box;
+}

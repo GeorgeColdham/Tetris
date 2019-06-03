@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Text (props) {
   return (
-    <div />
+    <div className={'l-shape glow'} />
   )
 }
