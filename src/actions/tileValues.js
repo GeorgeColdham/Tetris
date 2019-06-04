@@ -6,6 +6,8 @@ export const SET_LINE_SHAPE = 'set-line-shape'
 export const SET_MIRROR_L_SHAPE = 'set-mirrored-l-shape'
 export const SET_SQUARE_SHAPE = 'set-square-shape'
 export const SET_EMPTY_SHAPE = 'set-empty'
+export const DROP_ACTIVE_TILE = 'drop-active-tile'
+export const RESET_ACTIVE_TILES = 'reset-active-tiles'
 
 export default {
   SET_S_SHAPE,
@@ -15,5 +17,6 @@ export default {
   SET_LINE_SHAPE,
   SET_MIRROR_L_SHAPE,
   SET_SQUARE_SHAPE,
-  SET_EMPTY_SHAPE
+  SET_EMPTY_SHAPE,
+  RESET_ACTIVE_TILES
 }

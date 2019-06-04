@@ -2,25 +2,70 @@ import { NUMBER_OF_ROWS, NUMBER_OF_COLUMNS } from '../constants/board'
 import shapeName from '../constants/shapes'
 import tileActions from '../actions/tileValues'
 
-export const initalTiles = Array(NUMBER_OF_ROWS * NUMBER_OF_COLUMNS).fill(shapeName.EMPTY)
+export const initalTiles = {
+  board: Array(NUMBER_OF_ROWS * NUMBER_OF_COLUMNS).fill(shapeName.EMPTY),
+  activeTiles: []
+}
+
+const setClassName = (shape, glow) => {
+  return shape ? `${shape} ${glow && 'glow'}` : ''
+}
+
+const setActiveTile = (index, shape, glow) => [{ shape, glow, index }]
+
+const setBoard = (shape, board, action) => {
+  return board.map((tile, index) => index === action.index ? setClassName(shape, action.glow) : tile)
+}
+
+const setShape = (state, action, shape) => {
+  return {
+    board: setBoard(shape, state.board, action),
+    activeTiles: [...state.activeTiles, ...setActiveTile(action.index, shape, action.glow)]
+  }
+}
+
+const dropActiveTile = (state, action) => {
+  const activeTile = state.activeTiles.filter(tile => tile.index === action.index)[0]
+  const newActiveTile = { ...activeTile, index: activeTile.index + NUMBER_OF_COLUMNS }
+  const duelTileBoard = setBoard(activeTile.shape, state.board, newActiveTile)
+  const finalBoard = setBoard(shapeName.EMPTY, duelTileBoard, activeTile)
+  const newActiveTiles = state.activeTiles.map(tile => tile.index === action.index
+    ? { ...tile, index: tile.index + NUMBER_OF_COLUMNS }
+    : tile
+  )
+  const temp = {
+    board: finalBoard,
+    activeTiles: newActiveTiles
+  }
+  return temp
+}
+
 export const tilesReducer = (state, action) => {
   switch (action.type) {
     case tileActions.SET_S_SHAPE:
-      return state.map((tile, index) => index === action.index ? `${shapeName.S} ${action.glow && 'glow'}` : tile)
+      return setShape(state, action, shapeName.S)
     case tileActions.SET_Z_SHAPE:
-      return state.map((tile, index) => index === action.index ? `${shapeName.Z} ${action.glow && 'glow'}` : tile)
+      return setShape(state, action, shapeName.Z)
     case tileActions.SET_T_SHAPE:
-      return state.map((tile, index) => index === action.index ? `${shapeName.T} ${action.glow && 'glow'}` : tile)
+      return setShape(state, action, shapeName.T)
     case tileActions.SET_L_SHAPE:
-      return state.map((tile, index) => index === action.index ? `${shapeName.L} ${action.glow && 'glow'}` : tile)
+      return setShape(state, action, shapeName.L)
     case tileActions.SET_LINE_SHAPE:
-      return state.map((tile, index) => index === action.index ? `${shapeName.LINE} ${action.glow && 'glow'}` : tile)
+      return setShape(state, action, shapeName.LINE)
     case tileActions.SET_MIRROR_L_SHAPE:
-      return state.map((tile, index) => index === action.index ? `${shapeName.MIRROR_L} ${action.glow && 'glow'}` : tile)
+      return setShape(state, action, shapeName.MIRROR_L)
     case tileActions.SET_SQUARE_SHAPE:
-      return state.map((tile, index) => index === action.index ? `${shapeName.SQUARE} ${action.glow && 'glow'}` : tile)
+      return setShape(state, action, shapeName.SQUARE)
     case tileActions.SET_EMPTY_SHAPE:
-      return state.map((tile, index) => index === action.index ? `${shapeName.EMPTY} ${action.glow && 'glow'}` : tile)
+      return setShape(state, action, shapeName.EMPTY)
+    case tileActions.DROP_ACTIVE_TILE:
+      return dropActiveTile(state, action)
+    case tileActions.RESET_ACTIVE_TILES:
+      console.log('here')
+      return {
+        ...state,
+        activeTiles: []
+      }
   }
 }
 
