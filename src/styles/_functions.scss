@@ -16,6 +16,7 @@
 }
 
 @mixin glow($tile-color) {
+  content: '';
   box-shadow: 0px 0px 75px 8px $tile-color;
 }
 

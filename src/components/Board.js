@@ -9,7 +9,7 @@ export default function Board (props) {
         const column = i % NUMBER_OF_COLUMNS
         const row = Math.floor(i / NUMBER_OF_COLUMNS)
         const key = `${column},${row}`
-        return <GridTile key={key} />
+        return <GridTile key={key} tileValue={props.tileValues[i]} />
       })}
     </div>
   )

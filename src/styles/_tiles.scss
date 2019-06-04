@@ -1,55 +1,63 @@
-.s-shape::after {
-  background-color: $s-shape-tile-color;
-  @include tile-borders($s-shape-tile-color);
-  @include tile-after-element;
-
-  &.glow { @include glow($s-shape-tile-color); }
+.s-shape {
+  &::after {
+    background-color: $s-shape-tile-color;
+    @include tile-borders($s-shape-tile-color);
+    @include tile-after-element;
+  }
+  &.glow::after { @include glow($s-shape-tile-color); }
 }
 
-.z-shape::after {
-  background-color: $z-shape-tile-color;
-  @include tile-borders($z-shape-tile-color);
-  @include tile-after-element;
-
-  &.glow { @include glow($z-shape-tile-color); }
+.z-shape {
+  &::after {
+    background-color: $z-shape-tile-color;
+    @include tile-borders($z-shape-tile-color);
+    @include tile-after-element;
+  }
+  &.glow::after { @include glow($z-shape-tile-color); }
 }
 
-.t-shape::after {
-  background-color: $t-shape-tile-color;
-  @include tile-borders($t-shape-tile-color);
-  @include tile-after-element;
-
-  &.glow { @include glow($t-shape-tile-color); }
+.t-shape {
+  &::after {
+    background-color: $t-shape-tile-color;
+    @include tile-borders($t-shape-tile-color);
+    @include tile-after-element;
+  }
+  &.glow::after { @include glow($t-shape-tile-color); }
 }
 
-.l-shape::after {
-  background-color: $l-shape-tile-color;
-  @include tile-borders($l-shape-tile-color);
-  @include tile-after-element;
-
-  &.glow { @include glow($l-shape-tile-color); }
+.l-shape {
+  &::after {
+    background-color: $l-shape-tile-color;
+    @include tile-borders($l-shape-tile-color);
+    @include tile-after-element;
+  }
+  &.glow::after { @include glow($l-shape-tile-color); }
 }
 
-.line-shape::after {
-  background-color: $line-shape-tile-color;
-  @include tile-borders($line-shape-tile-color);
-  @include tile-after-element;
+.line-shape {
+  &::after {
+    background-color: $line-shape-tile-color;
+    @include tile-borders($line-shape-tile-color);
+    @include tile-after-element;
+  }
 
-  &.glow { @include glow($line-shape-tile-color); }
+  &.glow::after { @include glow($line-shape-tile-color); }
 }
 
-.mirrored-l-shape::after {
-  background-color: $mirrored-l-shape-tile-color;
-  @include tile-borders($mirrored-l-shape-tile-color);
-  @include tile-after-element;
-
-  &.glow { @include glow($mirrored-l-shape-tile-color); }
+.mirrored-l-shape {
+  &::after {
+    background-color: $mirrored-l-shape-tile-color;
+    @include tile-borders($mirrored-l-shape-tile-color);
+    @include tile-after-element;
+  }
+  &.glow::after { @include glow($mirrored-l-shape-tile-color); }
 }
 
-.square-shape::after {
-  background-color: $square-shape-tile-color;
-  @include tile-borders($square-shape-tile-color);
-  @include tile-after-element;
-
-  &.glow { @include glow($square-shape-tile-color); }
+.square-shape {
+  &::after {
+    background-color: $square-shape-tile-color;
+    @include tile-borders($square-shape-tile-color);
+    @include tile-after-element;
+  }
+  &.glow::after { @include glow($square-shape-tile-color); }
 }
