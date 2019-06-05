@@ -29,7 +29,7 @@ export default function App () {
         ? dropActiveTiles(boardState, updateBoard)
         : updateBoard({ type: tileActions.RESET_ACTIVE_TILES })
       : updateBoard({ type: generateShape(), index: 5, glow: true })
-  }, 1000)
+  }, 500)
 
   return (
     <>

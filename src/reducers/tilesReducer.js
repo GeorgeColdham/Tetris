@@ -58,7 +58,7 @@ const dropActiveTile = (state, action) => {
 
 const moveActiveTileRight = (state, action) => {
   const activeTile = state.activeTiles.filter(tile => tile.index === action.index)[0]
-  if (activeTile) {
+  if (activeTile && !hitsRightEdge(activeTile.index + 1)) {
     const newActiveTile = { ...activeTile, index: activeTile.index + 1 }
     const duelTileBoard = setBoard(activeTile.shape, state.board, newActiveTile)
     const finalBoard = setBoard(shapeName.EMPTY, duelTileBoard, activeTile)
@@ -76,7 +76,7 @@ const moveActiveTileRight = (state, action) => {
 
 const moveActiveTileLeft = (state, action) => {
   const activeTile = state.activeTiles.filter(tile => tile.index === action.index)[0]
-  if (activeTile) {
+  if (activeTile && !hitsLeftEdge(activeTile.index)) {
     const newActiveTile = { ...activeTile, index: activeTile.index - 1 }
     const duelTileBoard = setBoard(activeTile.shape, state.board, newActiveTile)
     const finalBoard = setBoard(shapeName.EMPTY, duelTileBoard, activeTile)
@@ -98,6 +98,14 @@ const resetActiveTiles = (state) => {
     activeTiles: [],
     inActiveTiles: [...state.inActiveTiles, ...state.activeTiles]
   }
+}
+
+const hitsRightEdge = nextIndex => {
+  return !(nextIndex % NUMBER_OF_COLUMNS)
+}
+
+const hitsLeftEdge = currentIndex => {
+  return !(currentIndex % NUMBER_OF_COLUMNS)
 }
 
 export const tilesReducer = (state, action) => {

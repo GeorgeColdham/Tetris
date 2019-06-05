@@ -9,21 +9,19 @@ export const canDrop = boardState => {
 
 export const dropActiveTiles = (boardState, updateBoard) => {
   return boardState.activeTiles.forEach(tile => {
-    return tile.index && updateBoard({ type: tileActions.DROP_ACTIVE_TILE, index: tile.index })
+    return !isNaN(tile.index) && updateBoard({ type: tileActions.DROP_ACTIVE_TILE, index: tile.index })
   })
 }
 
 export const moveActiveTilesRight = (boardState, updateBoard) => {
-  console.log('right')
   return boardState.activeTiles.forEach(tile => {
-    return tile.index && updateBoard({ type: tileActions.MOVE_ACTIVE_RIGHT, index: tile.index })
+    return !isNaN(tile.index) && updateBoard({ type: tileActions.MOVE_ACTIVE_RIGHT, index: tile.index })
   })
 }
 
 export const moveActiveTilesLeft = (boardState, updateBoard) => {
-  console.log('left')
   return boardState.activeTiles.forEach(tile => {
-    return tile.index && updateBoard({ type: tileActions.MOVE_ACTIVE_LEFT, index: tile.index })
+    return !isNaN(tile.index) && updateBoard({ type: tileActions.MOVE_ACTIVE_LEFT, index: tile.index })
   })
 }
 
