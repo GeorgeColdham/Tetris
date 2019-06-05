@@ -72,3 +72,9 @@ export const generateShape = () => {
       return tileActions.SET_SQUARE_SHAPE
   }
 }
+
+export const dropSequence = (boardState, updateBoard) => {
+  return canDrop(boardState)
+    ? dropActiveTiles(boardState, updateBoard)
+    : updateBoard({ type: tileActions.RESET_ACTIVE_TILES })
+}
