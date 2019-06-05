@@ -4,7 +4,8 @@ import tileActions from '../actions/tileValues'
 
 export const initalTiles = {
   board: Array(NUMBER_OF_ROWS * NUMBER_OF_COLUMNS).fill(shapeName.EMPTY),
-  activeTiles: []
+  activeTiles: [],
+  inActiveTiles: []
 }
 
 const setClassName = (shape, glow) => {
@@ -13,6 +14,10 @@ const setClassName = (shape, glow) => {
 
 const setActiveTile = (index, shape, glow) => [{ shape, glow, index }]
 
+const removeInactiveTies = (inactiveTiles, tileToRemove) => {
+  return inactiveTiles.filter(tile => tile.index !== tileToRemove)
+}
+
 const setBoard = (shape, board, action) => {
   return board.map((tile, index) => index === action.index ? setClassName(shape, action.glow) : tile)
 }
@@ -20,7 +25,16 @@ const setBoard = (shape, board, action) => {
 const setShape = (state, action, shape) => {
   return {
     board: setBoard(shape, state.board, action),
-    activeTiles: [...state.activeTiles, ...setActiveTile(action.index, shape, action.glow)]
+    activeTiles: [...state.activeTiles, ...setActiveTile(action.index, shape, action.glow)],
+    inActiveTiles: state.inActiveTiles
+  }
+}
+
+const setEmpty = (state, action, shape) => {
+  return {
+    board: setBoard(shape, state.board, action),
+    activeTiles: state.activeTiles,
+    inActiveTiles: removeInactiveTies(state.inActiveTiles, action.index)
   }
 }
 
@@ -33,11 +47,11 @@ const dropActiveTile = (state, action) => {
     ? { ...tile, index: tile.index + NUMBER_OF_COLUMNS }
     : tile
   )
-  const temp = {
+  return {
     board: finalBoard,
-    activeTiles: newActiveTiles
+    activeTiles: newActiveTiles,
+    inActiveTiles: state.inActiveTiles
   }
-  return temp
 }
 
 export const tilesReducer = (state, action) => {
@@ -57,14 +71,14 @@ export const tilesReducer = (state, action) => {
     case tileActions.SET_SQUARE_SHAPE:
       return setShape(state, action, shapeName.SQUARE)
     case tileActions.SET_EMPTY_SHAPE:
-      return setShape(state, action, shapeName.EMPTY)
+      return setEmpty(state, action, shapeName.EMPTY)
     case tileActions.DROP_ACTIVE_TILE:
       return dropActiveTile(state, action)
     case tileActions.RESET_ACTIVE_TILES:
-      console.log('here')
       return {
         ...state,
-        activeTiles: []
+        activeTiles: [],
+        inActiveTiles: [...state.inActiveTiles, ...state.activeTiles]
       }
   }
 }
