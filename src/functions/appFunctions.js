@@ -14,12 +14,14 @@ export const dropActiveTiles = (boardState, updateBoard) => {
 }
 
 export const moveActiveTilesRight = (boardState, updateBoard) => {
+  console.log('right')
   return boardState.activeTiles.forEach(tile => {
     return tile.index && updateBoard({ type: tileActions.MOVE_ACTIVE_RIGHT, index: tile.index })
   })
 }
 
 export const moveActiveTilesLeft = (boardState, updateBoard) => {
+  console.log('left')
   return boardState.activeTiles.forEach(tile => {
     return tile.index && updateBoard({ type: tileActions.MOVE_ACTIVE_LEFT, index: tile.index })
   })

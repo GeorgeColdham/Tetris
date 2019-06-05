@@ -40,50 +40,56 @@ const setEmpty = (state, action, shape) => {
 
 const dropActiveTile = (state, action) => {
   const activeTile = state.activeTiles.filter(tile => tile.index === action.index)[0]
-  const newActiveTile = { ...activeTile, index: activeTile.index + NUMBER_OF_COLUMNS }
-  const duelTileBoard = setBoard(activeTile.shape, state.board, newActiveTile)
-  const finalBoard = setBoard(shapeName.EMPTY, duelTileBoard, activeTile)
-  const newActiveTiles = state.activeTiles.map(tile => tile.index === action.index
-    ? { ...tile, index: tile.index + NUMBER_OF_COLUMNS }
-    : tile
-  )
-  return {
-    board: finalBoard,
-    activeTiles: newActiveTiles,
-    inActiveTiles: state.inActiveTiles
-  }
+  if (activeTile) {
+    const newActiveTile = { ...activeTile, index: activeTile.index + NUMBER_OF_COLUMNS }
+    const duelTileBoard = setBoard(activeTile.shape, state.board, newActiveTile)
+    const finalBoard = setBoard(shapeName.EMPTY, duelTileBoard, activeTile)
+    const newActiveTiles = state.activeTiles.map(tile => tile.index === action.index
+      ? { ...tile, index: tile.index + NUMBER_OF_COLUMNS }
+      : tile
+    )
+    return {
+      board: finalBoard,
+      activeTiles: newActiveTiles,
+      inActiveTiles: state.inActiveTiles
+    }
+  } return state
 }
 
 const moveActiveTileRight = (state, action) => {
   const activeTile = state.activeTiles.filter(tile => tile.index === action.index)[0]
-  const newActiveTile = { ...activeTile, index: activeTile.index + 1 }
-  const duelTileBoard = setBoard(activeTile.shape, state.board, newActiveTile)
-  const finalBoard = setBoard(shapeName.EMPTY, duelTileBoard, activeTile)
-  const newActiveTiles = state.activeTiles.map(tile => tile.index === action.index
-    ? { ...tile, index: tile.index + 1 }
-    : tile
-  )
-  return {
-    board: finalBoard,
-    activeTiles: newActiveTiles,
-    inActiveTiles: state.inActiveTiles
-  }
+  if (activeTile) {
+    const newActiveTile = { ...activeTile, index: activeTile.index + 1 }
+    const duelTileBoard = setBoard(activeTile.shape, state.board, newActiveTile)
+    const finalBoard = setBoard(shapeName.EMPTY, duelTileBoard, activeTile)
+    const newActiveTiles = state.activeTiles.map(tile => tile.index === action.index
+      ? { ...tile, index: tile.index + 1 }
+      : tile
+    )
+    return {
+      board: finalBoard,
+      activeTiles: newActiveTiles,
+      inActiveTiles: state.inActiveTiles
+    }
+  } return state
 }
 
 const moveActiveTileLeft = (state, action) => {
   const activeTile = state.activeTiles.filter(tile => tile.index === action.index)[0]
-  const newActiveTile = { ...activeTile, index: activeTile.index - 1 }
-  const duelTileBoard = setBoard(activeTile.shape, state.board, newActiveTile)
-  const finalBoard = setBoard(shapeName.EMPTY, duelTileBoard, activeTile)
-  const newActiveTiles = state.activeTiles.map(tile => tile.index === action.index
-    ? { ...tile, index: tile.index - 1 }
-    : tile
-  )
-  return {
-    board: finalBoard,
-    activeTiles: newActiveTiles,
-    inActiveTiles: state.inActiveTiles
-  }
+  if (activeTile) {
+    const newActiveTile = { ...activeTile, index: activeTile.index - 1 }
+    const duelTileBoard = setBoard(activeTile.shape, state.board, newActiveTile)
+    const finalBoard = setBoard(shapeName.EMPTY, duelTileBoard, activeTile)
+    const newActiveTiles = state.activeTiles.map(tile => tile.index === action.index
+      ? { ...tile, index: tile.index - 1 }
+      : tile
+    )
+    return {
+      board: finalBoard,
+      activeTiles: newActiveTiles,
+      inActiveTiles: state.inActiveTiles
+    }
+  } else return state
 }
 
 const resetActiveTiles = (state) => {

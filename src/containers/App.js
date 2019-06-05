@@ -7,24 +7,29 @@ import { canDrop, dropActiveTiles, generateShape, moveActiveTilesRight, moveActi
 
 export default function App () {
   const [boardState, updateBoard] = useReducer(tilesReducer, initalTiles)
+
+  const stopListener = () => {
+    window.removeEventListener('keydown', handler)
+  }
+
   useEffect(() => {
-    const handler = (event) => {
-      event.key === 'ArrowRight' && moveActiveTilesRight(boardState, updateBoard)
-      event.key === 'ArrowLeft' && moveActiveTilesLeft(boardState, updateBoard)
-    }
-
     window.addEventListener('keydown', handler)
-
-    return () => window.removeEventListener('keydown', handler)
+    return () => stopListener()
   })
 
+  const handler = (event) => {
+    event.key === 'ArrowRight' && moveActiveTilesRight(boardState, updateBoard)
+    event.key === 'ArrowLeft' && moveActiveTilesLeft(boardState, updateBoard)
+  }
+
   useInterval(() => {
+    stopListener()
     boardState.activeTiles.length
       ? canDrop(boardState)
         ? dropActiveTiles(boardState, updateBoard)
         : updateBoard({ type: tileActions.RESET_ACTIVE_TILES })
       : updateBoard({ type: generateShape(), index: 5, glow: true })
-  }, 500)
+  }, 1000)
 
   return (
     <>
