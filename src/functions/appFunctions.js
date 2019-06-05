@@ -44,6 +44,15 @@ export const onTile = boardState => {
   }).length
 }
 
+export const isGameOver = (state) => {
+  const gameState = state.inActiveTiles.filter(inactiveTile => {
+    return state.activeTiles.filter(activeTiles => {
+      return activeTiles.index === inactiveTile.index
+    }).length
+  }).length
+  return gameState
+}
+
 export const generateShape = () => {
   const shape = Math.floor(Math.random() * NUMBER_OF_SHAPES)
   switch (shape) {
