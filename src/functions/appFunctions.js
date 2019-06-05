@@ -1,4 +1,4 @@
-import { NUMBER_OF_ROWS, NUMBER_OF_COLUMNS } from '../constants/board'
+import { NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, NUMBER_OF_SHAPES } from '../constants/board'
 import tileActions from '../actions/tileValues'
 
 export const canDrop = boardState => {
@@ -23,7 +23,6 @@ export const onFloor = boardState => {
 }
 
 export const onTile = boardState => {
-  console.log(boardState.inActiveTiles)
   return !!boardState.activeTiles.filter(tile => {
     const nextTileIndex = tile.index + NUMBER_OF_COLUMNS
 
@@ -31,4 +30,24 @@ export const onTile = boardState => {
       tile.index === nextTileIndex
     ).length
   }).length
+}
+
+export const generateShape = () => {
+  const shape = Math.floor(Math.random() * Math.floor(NUMBER_OF_SHAPES))
+  switch (shape) {
+    case 0:
+      return tileActions.SET_S_SHAPE
+    case 1:
+      return tileActions.SET_Z_SHAPE
+    case 2:
+      return tileActions.SET_T_SHAPE
+    case 3:
+      return tileActions.SET_L_SHAPE
+    case 4:
+      return tileActions.SET_LINE_SHAPE
+    case 5:
+      return tileActions.SET_MIRROR_L_SHAPE
+    case 6:
+      return tileActions.SET_SQUARE_SHAPE
+  }
 }

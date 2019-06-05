@@ -3,7 +3,7 @@ import Board from '../components/Board'
 import tileActions from '../actions/tileValues'
 import { initalTiles, tilesReducer } from '../reducers/tilesReducer'
 import { useInterval, returnKeyPress } from '../functions/globalFunctions'
-import { canDrop, dropActiveTiles } from '../functions/appFunctions'
+import { canDrop, dropActiveTiles, generateShape } from '../functions/appFunctions'
 
 export default function App () {
   const [keyPress, setKey] = useState('-')
@@ -16,9 +16,11 @@ export default function App () {
   const handleKeyPressEvent = e => returnKeyPress(e, setKey)
 
   useInterval(() => {
-    canDrop(boardState)
-      ? dropActiveTiles(boardState, updateBoard)
-      : updateBoard({ type: tileActions.RESET_ACTIVE_TILES })
+    boardState.activeTiles.length
+      ? canDrop(boardState)
+        ? dropActiveTiles(boardState, updateBoard)
+        : updateBoard({ type: tileActions.RESET_ACTIVE_TILES })
+      : updateBoard({ type: generateShape(), index: 5, glow: true })
   }, 250)
 
   return (
