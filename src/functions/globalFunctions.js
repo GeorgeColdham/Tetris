@@ -19,23 +19,3 @@ export const useInterval = (callback, delay) => {
     }
   }, [delay])
 }
-
-export const returnKeyPress = (e, callbackFunc) => {
-  switch (e.key) {
-    case 'ArrowUp':
-      callbackFunc(e.key)
-      break
-    case 'ArrowDown':
-      callbackFunc(e.key)
-      break
-    case 'ArrowLeft':
-      callbackFunc(e.key)
-      break
-    case 'ArrowRight':
-      callbackFunc(e.key)
-      break
-    default:
-      callbackFunc('-')
-      break
-  }
-}

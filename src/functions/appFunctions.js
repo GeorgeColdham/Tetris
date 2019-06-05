@@ -8,8 +8,20 @@ export const canDrop = boardState => {
 }
 
 export const dropActiveTiles = (boardState, updateBoard) => {
-  boardState.activeTiles.forEach(tile => {
-    tile.index && updateBoard({ type: tileActions.DROP_ACTIVE_TILE, index: tile.index })
+  return boardState.activeTiles.forEach(tile => {
+    return tile.index && updateBoard({ type: tileActions.DROP_ACTIVE_TILE, index: tile.index })
+  })
+}
+
+export const moveActiveTilesRight = (boardState, updateBoard) => {
+  return boardState.activeTiles.forEach(tile => {
+    return tile.index && updateBoard({ type: tileActions.MOVE_ACTIVE_RIGHT, index: tile.index })
+  })
+}
+
+export const moveActiveTilesLeft = (boardState, updateBoard) => {
+  return boardState.activeTiles.forEach(tile => {
+    return tile.index && updateBoard({ type: tileActions.MOVE_ACTIVE_LEFT, index: tile.index })
   })
 }
 
@@ -33,7 +45,7 @@ export const onTile = boardState => {
 }
 
 export const generateShape = () => {
-  const shape = Math.floor(Math.random() * Math.floor(NUMBER_OF_SHAPES))
+  const shape = Math.floor(Math.random() * NUMBER_OF_SHAPES)
   switch (shape) {
     case 0:
       return tileActions.SET_S_SHAPE

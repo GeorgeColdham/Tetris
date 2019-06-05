@@ -54,6 +54,46 @@ const dropActiveTile = (state, action) => {
   }
 }
 
+const moveActiveTileRight = (state, action) => {
+  const activeTile = state.activeTiles.filter(tile => tile.index === action.index)[0]
+  const newActiveTile = { ...activeTile, index: activeTile.index + 1 }
+  const duelTileBoard = setBoard(activeTile.shape, state.board, newActiveTile)
+  const finalBoard = setBoard(shapeName.EMPTY, duelTileBoard, activeTile)
+  const newActiveTiles = state.activeTiles.map(tile => tile.index === action.index
+    ? { ...tile, index: tile.index + 1 }
+    : tile
+  )
+  return {
+    board: finalBoard,
+    activeTiles: newActiveTiles,
+    inActiveTiles: state.inActiveTiles
+  }
+}
+
+const moveActiveTileLeft = (state, action) => {
+  const activeTile = state.activeTiles.filter(tile => tile.index === action.index)[0]
+  const newActiveTile = { ...activeTile, index: activeTile.index - 1 }
+  const duelTileBoard = setBoard(activeTile.shape, state.board, newActiveTile)
+  const finalBoard = setBoard(shapeName.EMPTY, duelTileBoard, activeTile)
+  const newActiveTiles = state.activeTiles.map(tile => tile.index === action.index
+    ? { ...tile, index: tile.index - 1 }
+    : tile
+  )
+  return {
+    board: finalBoard,
+    activeTiles: newActiveTiles,
+    inActiveTiles: state.inActiveTiles
+  }
+}
+
+const resetActiveTiles = (state) => {
+  return {
+    ...state,
+    activeTiles: [],
+    inActiveTiles: [...state.inActiveTiles, ...state.activeTiles]
+  }
+}
+
 export const tilesReducer = (state, action) => {
   switch (action.type) {
     case tileActions.SET_S_SHAPE:
@@ -75,11 +115,11 @@ export const tilesReducer = (state, action) => {
     case tileActions.DROP_ACTIVE_TILE:
       return dropActiveTile(state, action)
     case tileActions.RESET_ACTIVE_TILES:
-      return {
-        ...state,
-        activeTiles: [],
-        inActiveTiles: [...state.inActiveTiles, ...state.activeTiles]
-      }
+      return resetActiveTiles(state)
+    case tileActions.MOVE_ACTIVE_RIGHT:
+      return moveActiveTileRight(state, action)
+    case tileActions.MOVE_ACTIVE_LEFT:
+      return moveActiveTileLeft(state, action)
   }
 }
 

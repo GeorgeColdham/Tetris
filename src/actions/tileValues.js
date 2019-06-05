@@ -8,6 +8,8 @@ export const SET_SQUARE_SHAPE = 'set-square-shape'
 export const SET_EMPTY_SHAPE = 'set-empty'
 export const DROP_ACTIVE_TILE = 'drop-active-tile'
 export const RESET_ACTIVE_TILES = 'reset-active-tiles'
+export const MOVE_ACTIVE_RIGHT = 'move-active-right'
+export const MOVE_ACTIVE_LEFT = 'move-active-left'
 
 export default {
   SET_S_SHAPE,
@@ -18,5 +20,7 @@ export default {
   SET_MIRROR_L_SHAPE,
   SET_SQUARE_SHAPE,
   SET_EMPTY_SHAPE,
-  RESET_ACTIVE_TILES
+  RESET_ACTIVE_TILES,
+  MOVE_ACTIVE_RIGHT,
+  MOVE_ACTIVE_LEFT
 }
