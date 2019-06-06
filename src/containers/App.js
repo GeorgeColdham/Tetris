@@ -2,7 +2,7 @@ import React, { useReducer, useEffect, useState } from 'react'
 import Board from '../components/Board'
 import { initalTiles, tilesReducer } from '../reducers/tilesReducer'
 import { useInterval } from '../functions/globalFunctions'
-import { generateShape, moveActiveTilesRight, moveActiveTilesLeft, isGameOver, dropSequence } from '../functions/appFunctions'
+import { moveActiveTilesRight, moveActiveTilesLeft, isGameOver, dropSequence, newShapeSequence, removeRows, dropBoard } from '../functions/appFunctions'
 
 export default function App () {
   const [boardState, updateBoard] = useReducer(tilesReducer, initalTiles)
@@ -19,6 +19,7 @@ export default function App () {
   }
 
   useEffect(() => {
+    dropBoard(updateBoard, removeRows(updateBoard, boardState.inActiveTiles))
     window.addEventListener('keydown', keyDownHandler)
     return () => stopListeners()
   })
@@ -29,12 +30,13 @@ export default function App () {
       ? isGameOver(boardState)
         ? setDropInterval(0)
         : dropSequence(boardState, updateBoard)
-      : updateBoard({ type: generateShape(), index: 5, glow: true })
+      : newShapeSequence(updateBoard, boardState.inActiveTiles)
   }, dropInterval)
 
   return (
     <>
       <Board tileValues={boardState.board} />
+      <button onClick={() => newShapeSequence(updateBoard, boardState.inActiveTiles)}>CLick ME</button>
     </>
   )
 }

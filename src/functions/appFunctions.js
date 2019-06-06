@@ -74,7 +74,35 @@ export const generateShape = () => {
 }
 
 export const dropSequence = (boardState, updateBoard) => {
-  return canDrop(boardState)
-    ? dropActiveTiles(boardState, updateBoard)
-    : updateBoard({ type: tileActions.RESET_ACTIVE_TILES })
+  if (canDrop(boardState)) {
+    dropActiveTiles(boardState, updateBoard)
+  } else {
+    updateBoard({ type: tileActions.RESET_ACTIVE_TILES })
+  }
+}
+
+export const dropBoard = (updateBoard, rowsRemoved) => {
+  rowsRemoved.length && updateBoard({ type: tileActions.DROP_BOARD, rowsRemoved })
+}
+
+export const removeRows = (updateBoard, inactiveTiles) =>
+  Array(NUMBER_OF_ROWS).fill('').map((row, index) => index * NUMBER_OF_COLUMNS)
+    .filter(row =>
+      inactiveTiles.filter(tile =>
+        tile.index === row).length)
+    .map(row =>
+      Array(NUMBER_OF_COLUMNS).fill('').map((col, cIndex) =>
+        cIndex + row))
+    .map(rowIndex => rowIndex.filter(row =>
+      inactiveTiles.filter(tile =>
+        tile.index === row).length))
+    .filter(row =>
+      row.length === NUMBER_OF_COLUMNS)
+    .map(row => {
+      row.map(tile => updateBoard({ type: tileActions.SET_EMPTY_SHAPE, index: tile }))
+      return row
+    })
+
+export const newShapeSequence = (updateBoard, inactiveTiles) => {
+  updateBoard({ type: generateShape(), index: 5, glow: false })
 }

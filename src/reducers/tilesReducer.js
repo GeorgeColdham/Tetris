@@ -2,8 +2,10 @@ import { NUMBER_OF_ROWS, NUMBER_OF_COLUMNS } from '../constants/board'
 import shapeName from '../constants/shapes'
 import tileActions from '../actions/tileValues'
 
+const defaultEmptyBoard = Array(NUMBER_OF_ROWS * NUMBER_OF_COLUMNS).fill(shapeName.EMPTY)
+
 export const initalTiles = {
-  board: Array(NUMBER_OF_ROWS * NUMBER_OF_COLUMNS).fill(shapeName.EMPTY),
+  board: defaultEmptyBoard,
   activeTiles: [],
   inActiveTiles: []
 }
@@ -54,6 +56,29 @@ const dropActiveTile = (state, action) => {
       inActiveTiles: state.inActiveTiles
     }
   } return state
+}
+
+const dropAllTiles = (state, action) => {
+  const rowBounds = action.rowsRemoved.map(row => row[0])
+  const newInActiveTiles = state.inActiveTiles
+    .map(tile => {
+      const numOfRowsToDrop = rowBounds.reduce((acc, currVal) => {
+        return tile.index < currVal ? acc + 1 : acc
+      }, 0)
+      return { ...tile, index: tile.index + (numOfRowsToDrop * NUMBER_OF_COLUMNS) }
+    })
+
+  const newBoard = defaultEmptyBoard.map((tile, index) => {
+    const matchingTile = newInActiveTiles.filter(inactiveTile => {
+      return inactiveTile.index === index
+    })
+    return matchingTile.length ? setClassName(matchingTile[0].shape, matchingTile[0].glow) : ''
+  })
+  return {
+    board: newBoard,
+    activeTiles: state.activeTiles,
+    inActiveTiles: newInActiveTiles
+  }
 }
 
 const moveActiveTileRight = (state, action) => {
@@ -138,6 +163,8 @@ export const tilesReducer = (state, action) => {
       return moveActiveTileRight(state, action)
     case tileActions.MOVE_ACTIVE_LEFT:
       return moveActiveTileLeft(state, action)
+    case tileActions.DROP_BOARD:
+      return dropAllTiles(state, action)
   }
 }
 

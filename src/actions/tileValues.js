@@ -10,6 +10,7 @@ export const DROP_ACTIVE_TILE = 'drop-active-tile'
 export const RESET_ACTIVE_TILES = 'reset-active-tiles'
 export const MOVE_ACTIVE_RIGHT = 'move-active-right'
 export const MOVE_ACTIVE_LEFT = 'move-active-left'
+export const DROP_BOARD = 'drop-board'
 
 export default {
   SET_S_SHAPE,
@@ -22,5 +23,6 @@ export default {
   SET_EMPTY_SHAPE,
   RESET_ACTIVE_TILES,
   MOVE_ACTIVE_RIGHT,
-  MOVE_ACTIVE_LEFT
+  MOVE_ACTIVE_LEFT,
+  DROP_BOARD
 }
